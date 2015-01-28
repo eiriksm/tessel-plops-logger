@@ -1,0 +1,30 @@
+{
+  "name": "tessel-plops-logger",
+  "version": "1.0.0",
+  "description": "Logs the plops of a beer fermentation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eiriksm/tessel-plops-logger.git"
+  },
+  "keywords": [
+    "tessel",
+    "iot",
+    "beer"
+  ],
+  "author": "Eirik S. Morland <eirik@morland.no>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eiriksm/tessel-plops-logger/issues"
+  },
+  "homepage": "https://github.com/eiriksm/tessel-plops-logger",
+  "devDependencies": {
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.5",
+    "mocha": "^2.1.0",
+    "should": "^4.6.1"
+  }
+}

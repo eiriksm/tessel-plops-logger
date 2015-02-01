@@ -4,7 +4,7 @@
   "description": "Logs the plops of a beer fermentation.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "eslint . && mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/eiriksm/tessel-plops-logger",
   "devDependencies": {
     "coveralls": "^2.11.2",
+    "eslint": "^0.13.0",
     "istanbul": "^0.3.5",
     "mocha": "^2.1.0",
     "should": "^4.6.1"

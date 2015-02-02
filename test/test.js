@@ -40,7 +40,6 @@ describe('Module functionality', function() {
       maxLevel: 25
     }, mockTessel);
     l.start(function(d) {
-      // as this is an interval, we just ignore all other data than the first.
       l.stop();
       lastWritten.should.equal(true);
       d.should.equal(3);

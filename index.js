@@ -44,18 +44,25 @@ PlopsLogger.prototype.start = function(callback) {
     });
   });
   self.callback = callback;
-  self._repeater = setInterval(function() {
+  var repeatFunction = function() {
+    if (self.stopped) {
+      return;
+    }
+
     self.log('Sending callback for id', self.id);
     if (self.callback) {
       self.callback(plops);
     }
     plops = 0;
-  }, self.interval * 1000);
+    self._repeater = setTimeout(repeatFunction, self.interval * 1000);
+  };
+  self._repeater = setTimeout(repeatFunction, self.interval * 1000);
 
 };
 
 PlopsLogger.prototype.stop = function() {
-  clearInterval(this._repeater);
+  clearTimeout(this._repeater);
+  this.stopped = true;
 };
 
 PlopsLogger.prototype.log = function() {

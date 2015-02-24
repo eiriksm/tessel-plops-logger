@@ -5,4 +5,5 @@
 [![Dependency Status](https://david-dm.org/eiriksm/tessel-plops-logger.svg?theme=shields.io)](https://david-dm.org/eiriksm/tessel-plops-logger)
 
 Logs the plops of a beer fermentation. Like so.
+
 ![Plopping action](https://raw.github.com/eiriksm/tessel-plops-logger/master/plops.gif)

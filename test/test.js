@@ -39,7 +39,7 @@ describe('Module functionality', function() {
       level: 20,
       maxLevel: 25
     }, mockTessel);
-    l.start(function(d) {
+    l.start(function(e, d) {
       l.stop();
       lastWritten.should.equal(true);
       d.should.equal(3);
@@ -58,7 +58,7 @@ describe('Module functionality', function() {
       level: 20,
       maxLevel: 25
     }, mockTessel);
-    l.start(function(d) {
+    l.start(function(e, d) {
       triggerLevel.should.equal(20);
       l.stop();
       d.should.equal(0);
@@ -69,6 +69,5 @@ describe('Module functionality', function() {
     triggerLevel.should.equal(20);
     mockLib.emit('sound-trigger', 26);
     triggerLevel.should.equal(0);
-
   });
 });

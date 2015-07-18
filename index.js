@@ -7,10 +7,10 @@ function PlopsLogger(ambient, opts, tessel) {
   self.level = opts.level || 0.017;
   self.maxLevel = opts.maxLevel || 0.023;
   self.debug = opts.debug || false;
-  self.interval = opts.interval || 60000;
+  self.interval = opts.interval || 60;
   var ledNumber = opts.ledNumber || 1;
   self.led1 = tessel.led[ledNumber];
-  self.id = Math.random();
+  self.id = (Math.random() + '').substring(2);
   self.log('Starting plop logger with id', self.id);
 }
 
@@ -43,6 +43,11 @@ PlopsLogger.prototype.start = function(callback) {
       }, 1000);
     });
   });
+  self.ambient.on('error', function(e) {
+    self.stopped = true;
+    self.log('Had an error with ambient:', e);
+    self.callback(e);
+  });
   self.callback = callback;
   var repeatFunction = function() {
     if (self.stopped) {
@@ -51,7 +56,7 @@ PlopsLogger.prototype.start = function(callback) {
 
     self.log('Sending callback for id', self.id);
     if (self.callback) {
-      self.callback(plops);
+      self.callback(null, plops);
     }
     plops = 0;
     self._repeater = setTimeout(repeatFunction, self.interval * 1000);
@@ -61,8 +66,10 @@ PlopsLogger.prototype.start = function(callback) {
 };
 
 PlopsLogger.prototype.stop = function() {
-  clearTimeout(this._repeater);
   this.stopped = true;
+  clearTimeout(this._repeater);
+  this.ambient.clearSoundTrigger();
+  this.log('Interval check stopped and sound trigger cleared.');
 };
 
 PlopsLogger.prototype.log = function() {
@@ -73,7 +80,7 @@ PlopsLogger.prototype.log = function() {
 
 module.exports = function(lib, opts, tessel) {
   // These parameters are really required.
-  if (!lib || !opts) {
+  if (!lib || !opts || !tessel) {
     throw new Error('Please provide all options required (lib and opts)');
   }
   var ambient = lib;

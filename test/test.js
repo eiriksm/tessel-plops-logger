@@ -1,6 +1,6 @@
 'use strict';
 
-require('should');
+var should = require('should');
 var lastWritten = '';
 var mockLed = {
   write: function(d) {
@@ -34,12 +34,18 @@ describe('Module functionality', function() {
     l.start.should.be.instanceOf(Function);
   });
   it('Should return a value if we tell it to', function(done) {
+    var pc = 0;
     var l = require('..')(mockLib, {
       interval: 0.5,
       level: 20,
-      maxLevel: 25
+      maxLevel: 25,
+      plopCallback: function(e) {
+        should(e).equal(null);
+        pc++;
+      }
     }, mockTessel);
     l.start(function(e, d) {
+      pc.should.equal(3);
       l.stop();
       lastWritten.should.equal(true);
       d.should.equal(3);

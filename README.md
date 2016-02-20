@@ -21,7 +21,8 @@ var options = {
   interval: 3,  // Interval for sending data back (in s.)
   ledNumber: 1, // The led number on the tessel to light up when sensing a plop.
   level: 0.017, // The volume level to trigger the sound trigger.
-  maxLevel: 0.1 // The max volume level (higher sounds will be ignored).
+  maxLevel: 0.1, // The max volume level (higher sounds will be ignored).
+  plopCallback: function (err, data) {} // Callback that will be called on every plop.
 };
 
 var tpl = require('tessel-plops-logger')(ambient, options, tessel);

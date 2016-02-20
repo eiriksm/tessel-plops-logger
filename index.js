@@ -12,6 +12,7 @@ function PlopsLogger(ambient, opts, tessel) {
   self.led1 = tessel.led[ledNumber];
   self.id = (Math.random() + '').substring(2);
   self.log('Starting plop logger with id', self.id);
+  self.plopCallback = opts.plopCallback || function () {};
 }
 
 PlopsLogger.prototype.start = function(callback) {
@@ -23,6 +24,7 @@ PlopsLogger.prototype.start = function(callback) {
 
     self.ambient.on('sound-trigger', function(data) {
       self.log('Sound triggered with level ' + data);
+      self.plopCallback(null, data);
       self.ambient.clearSoundTrigger();
       if (data > self.maxLevel) {
         setTimeout(function () {

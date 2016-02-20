@@ -76,4 +76,36 @@ describe('Module functionality', function() {
     mockLib.emit('sound-trigger', 26);
     triggerLevel.should.equal(0);
   });
+  it('Should call the callback with an error on error emit', function(done) {
+    var l = require('..')(mockLib, {
+      interval: 1.1,
+      level: 20,
+      maxLevel: 25
+    }, mockTessel);
+    l.start(function(e) {
+      e.should.equal('testerror');
+      l.stop();
+      done();
+    });
+    mockLib.emit('ready');
+    // Emit an error.
+    mockLib.emit('error', 'testerror');
+  });
+  it('Should increase the coverage with this random thing', function(done) {
+    var l = require('..')(mockLib, {
+      interval: 1.1,
+      level: 20,
+      maxLevel: 25
+    }, mockTessel);
+    l.start();
+    mockLib.emit('ready');
+    triggerLevel.should.equal(20);
+    lastWritten = 0;
+    mockLib.emit('sound-trigger', 22);
+    triggerLevel.should.equal(0);
+    setTimeout(function() {
+      lastWritten.should.equal(false);
+      done();
+    }, 1500);
+  });
 });

@@ -46,6 +46,9 @@ PlopsLogger.prototype.start = function(callback) {
     });
   });
   self.ambient.on('error', function(e) {
+    if (self.stopped) {
+      return;
+    }
     self.stopped = true;
     self.log('Had an error with ambient:', e);
     self.callback(e);

@@ -1,9 +1,17 @@
 language: node_js
 node_js:
-  - 4
-  - 6
-  - node
+- 4
+- 6
+- node
 sudo: false
 after_script:
-  - make test-cov
-  - cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+- make test-cov
+- cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+deploy:
+  provider: npm
+  email: eirik@morland.no
+  api_key:
+    secure: W3r6WrdTUnq9XBUIAXwqR7KpmErxln0oyw7qsNlW3YqBShyTHIAR5dkEAA0N1JGKXX9s6W28JDrFR2BOO+80o6ZIBGEYZYqlx74uIKLkPVgujldBA97v7JwLDvT46DOsw/6dx63JuhMFXAuVpbCSWs7y6yp8YJhDW5KybTEYXxA=
+  on:
+    tags: true
+    repo: eiriksm/tessel-plops-logger

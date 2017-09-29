@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/eiriksm/tessel-plops-logger",
   "devDependencies": {
-    "coveralls": "^2.11.2",
+    "coveralls": "^3.0.0",
     "eslint": "^4.1.0",
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",

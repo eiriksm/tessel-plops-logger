@@ -4,7 +4,7 @@
   "description": "Logs the plops of a beer fermentation.",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && mocha"
+    "test": "eslint . && mocha --exit"
   },
   "repository": {
     "type": "git",
